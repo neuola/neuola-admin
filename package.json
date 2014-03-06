@@ -1,0 +1,20 @@
+{
+  "name": "neula-admin",
+  "description": "An pluggable content management website.",
+  "version": "1.0.0-pre",
+  "author": "Wang Zhi <yfwz100@yeah.net>",
+  "keywords": ["neuola", "cms"],
+  "repository": "git://github.com/neuola/neuola-admin",
+  "license": "BSD License",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": ">=4.0.0-rc2",
+    "jade": "1.3.0",
+    "marked": "0.2.10"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
+}
