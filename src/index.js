@@ -1,4 +1,5 @@
 var express = require('express');
+var stylus = require('stylus');
 var util = require('util');
 
 // default settings.
@@ -42,6 +43,21 @@ module.exports = function application(params) {
   app.use('/catalog', require('./route-catalog'));
   app.use('/message', require('./route-message'));
 
+  // Dashboard.
+  app.get('/', function (req, res) {
+    // FIXME the dashboard page.
+  });
+
+  app.use(stylus.middleware({
+    src: process.cwd() + '/stylus',
+    dest: process.cwd() + '/public',
+    compress: true,
+    debug: true
+  }));
+
+  app.use(express.static('/public'));
+
+  // Render a 404 page if pages does not match any pattern.
   app.use(function (req, res) {
     res.send('404 Not found!');
   });
