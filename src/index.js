@@ -1,6 +1,6 @@
 var express = require('express');
 var stylus = require('stylus');
-var util = require('util');
+var middleware = require('./middleware');
 
 // default settings.
 var defaults = {
@@ -36,7 +36,7 @@ module.exports = function application(params) {
   app.engine('jade', require('jade').__express);
 
   // Log the visited pages on console.
-  app.use(util.log);
+  app.use(middleware.log);
 
   // Administration routes.
   app.use('/article', require('./route-article'));
@@ -51,7 +51,7 @@ module.exports = function application(params) {
   app.use(stylus.middleware({
     src: process.cwd() + '/stylus',
     dest: process.cwd() + '/public',
-    compress: true,
+    compress: false,
     debug: true
   }));
 
@@ -59,7 +59,7 @@ module.exports = function application(params) {
 
   // Render a 404 page if pages does not match any pattern.
   app.use(function (req, res) {
-    res.send('404 Not found!');
+    res.render('404.jade');
   });
 
   return app;
