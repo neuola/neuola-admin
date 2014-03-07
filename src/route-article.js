@@ -7,7 +7,7 @@ router.route('/create').get(function (req, res) {
   // TODO post the article.
 });
 
-router.route('/del/:article').post(function (req, res) {
+router.route('/delete/:article').post(function (req, res) {
   // TODO delete the article
 });
 

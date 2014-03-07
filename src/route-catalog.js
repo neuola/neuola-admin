@@ -1,4 +1,4 @@
-var router = require('express').Router();
+var router = module.exports = require('express').Router();
 
 router.route('/create').get(function (req, res) {
 }).post(function (req, res) {
