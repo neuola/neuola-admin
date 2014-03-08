@@ -58,9 +58,7 @@ module.exports = function application(params) {
   app.use(express.static('/public'));
 
   // Render a 404 page if pages does not match any pattern.
-  app.use(function (req, res) {
-    res.render('404.jade');
-  });
+  app.use(middleware.toPage('404.jade'));
 
   return app;
 }
