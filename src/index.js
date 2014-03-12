@@ -1,3 +1,6 @@
+/*jslint eqeq: true, indent: 2, node: true, plusplus: true, regexp: true, unparam: true, vars: true, nomen: true, forin: true */
+'use strict';
+
 var express = require('express');
 var stylus = require('stylus');
 var middleware = require('./middleware');
@@ -25,15 +28,18 @@ module.exports = function application(params) {
   var app = express();
 
   // Evironment Settings
-  for (var attr in defaults) {
-    if (params[attr]) {
-      app.set(attr, params[attr]);
-    } else {
-      app.set(attr, defaults[attr]);
+  (function () {
+    var attr;
+    for (attr in defaults) {
+      if (params[attr]) {
+        app.set(attr, params[attr]);
+      } else {
+        app.set(attr, defaults[attr]);
+      }
     }
-  }
-  // Set the default view engine.
-  app.engine('jade', require('jade').__express);
+    // Set the default view engine.
+    app.engine('jade', require('jade').__express);
+  }());
 
   // Log the visited pages on console.
   app.use(middleware.log);
@@ -55,10 +61,10 @@ module.exports = function application(params) {
     debug: true
   }));
 
-  app.use(express.static('/public'));
+  app.use(express['static']('/public'));
 
   // Render a 404 page if pages does not match any pattern.
   app.use(middleware.toPage('404.jade'));
 
   return app;
-}
+};

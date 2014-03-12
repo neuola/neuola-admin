@@ -1,3 +1,6 @@
+/*jslint eqeq: true, indent: 2, node: true, plusplus: true, regexp: true, unparam: true, vars: true, nomen: true */
+'use strict';
+
 /**
  * The utilities function.
  *

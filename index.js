@@ -1,3 +1,6 @@
+/*jslint indent: 2, node: true */
+'use strict';
+
 /**
  * The administration site for [Neuola][].
  * ==============================================
