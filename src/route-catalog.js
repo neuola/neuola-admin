@@ -24,7 +24,7 @@ router.route('/create').get(mw.toPage('catalog-create')).post(function (req, res
 router.route('/update/:id').get(mw.toPage('catalog-update')).post(function (req, res) {
   var id = req.param('id');
   var rawCatalog = req.param('catalog');
-  if (rawCatalog) {
+  if (id && rawCatalog) {
     var q = model.Catalog.findByIdAndUpdate(id, rawCatalog);
     q.exec().then(function (doc) {
       res.render('catalog-update-done', doc);
