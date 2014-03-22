@@ -28,7 +28,7 @@ router.route('/delete/:id').all(function (req, res) {
   } else {
     var q = model.Post.findByIdAndRemove(id);
     q.exec().then(function (doc) {
-      res.render('article-del', doc);
+      res.render('article-delete-done', doc);
     }, res.render.bind(res, 'error'));
   }
 });
@@ -55,6 +55,6 @@ router.route('/browse/:tag').get(function (req, res) {
   }
   var q = model.Post.listByTags(tags);
   q.exec().then(function (docs) {
-    res.render('article-list-by-tags', {articles: docs});
+    res.render('article-list-latest-by-tags', {articles: docs});
   }, res.render.bind(res, 'error'));
 });
