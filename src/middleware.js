@@ -20,4 +20,3 @@ exports.toPage = function (page) {
     res.render(page);
   };
 };
-
