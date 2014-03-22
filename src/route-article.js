@@ -21,7 +21,7 @@ router.route('/create').get(mw.toPage('article-create')).post(function (req, res
   }
 });
 
-router.route('/delete/:article').all(function (req, res) {
+router.route('/delete/:id').all(function (req, res) {
   var id = req.param('id');
   if (!id) {
     res.render('invalid');
@@ -33,12 +33,13 @@ router.route('/delete/:article').all(function (req, res) {
   }
 });
 
-router.route('/update/:article').get(mw.toPage('article-update')).post(function (req, res) {
+router.route('/update/:id').get(mw.toPage('article-update')).post(function (req, res) {
+  var id = req.param('id');
   var rawPost = req.param('post');
-  if (!rawPost) {
+  if (!rawPost || !id) {
     res.render('invalid');
   } else {
-    var q = model.Post.findbyIdAndUpdate(rawPost.id, rawPost);
+    var q = model.Post.findbyIdAndUpdate(id, rawPost);
     q.exec().then(function (doc) {
       res.render('article-update-done', doc);
     }, res.render.bind(res, 'error'));
