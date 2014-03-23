@@ -10,6 +10,8 @@ router.route('/create').get(mw.toPage('article-create')).post(function (req, res
   if (!rawPost) {
     res.render('invalid');
   } else {
+    // Add the user as the author.
+    rawPost.author = req.user._id;
     var post = new model.Post(rawPost);
     post.save(function (err, doc) {
       if (err) {
@@ -39,6 +41,7 @@ router.route('/update/:id').get(mw.toPage('article-update')).post(function (req,
   if (!rawPost || !id) {
     res.render('invalid');
   } else {
+    rawPost.author = req.user._id;
     var q = model.Post.findbyIdAndUpdate(id, rawPost);
     q.exec().then(function (doc) {
       res.render('article-update-done', doc);
@@ -53,7 +56,7 @@ router.route('/browse/:tag').get(function (req, res) {
   } else {
     tags = [];
   }
-  var q = model.Post.listByTags(tags);
+  var q = model.Post.listByUserTags(req.user._id, tags);
   q.exec().then(function (docs) {
     res.render('article-list-latest-by-tags', {articles: docs});
   }, res.render.bind(res, 'error'));
