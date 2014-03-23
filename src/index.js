@@ -26,7 +26,7 @@ module.exports = function application(config) {
   app.use('/', require('./route-dashboard'));
 
   // Render a 404 page if pages does not match any pattern.
-  app.use(mw.toPage('404.jade'));
+  app.use(mw.toPage('invalid'));
 
   return app;
 };
