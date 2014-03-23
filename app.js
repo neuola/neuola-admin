@@ -15,7 +15,10 @@ app.use(require('./src/middleware').log);
 // Mount the neuola-admin module.
 app.use(require('./src')());
 
-// Start an application running at port 3000.
-app.listen(3000);
+// Only start listening on 3000 when this file is run directly.
+if (!module.parent) {
+  // Start an application running at port 3000.
+  app.listen(3000);
 
-console.log('Server is running at 3000');
+  console.log('Server is running at 3000');
+}
