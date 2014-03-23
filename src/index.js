@@ -5,11 +5,6 @@ var Router = require('express').Router;
 var stylus = require('stylus');
 var mw = require('./middleware');
 
-// default settings.
-var defaults = {
-  'env': 'development'
-};
-
 /**
  * The exported function to expose an [Express][] context. The accepted parameters will be used as [Express][] context's configuration.
  *
@@ -17,6 +12,10 @@ var defaults = {
  */
 module.exports = function application(config) {
   var app = new Router();
+
+  if (config.db) {
+    require('neuola-data')(config.db);
+  }
 
   // Administration routes.
   app.use('/article', require('./route-article'));
