@@ -7,7 +7,8 @@
   "repository": "git://github.com/neuola/neuola-admin",
   "license": "BSD License",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "test": "./node_modules/.bin/mocha --reporter Spec"
   },
   "dependencies": {
     "express": ">=4.0.0-rc2",
@@ -15,6 +16,11 @@
     "stylus": ">=0.42.3",
     "marked": "0.2.10",
     "neuola-data": "git+https://github.com/neuola/neuola-data.git#v0.2.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "supertest": "*",
+    "tungus": "*"
   },
   "engines": {
     "node": ">= 0.10.0"
